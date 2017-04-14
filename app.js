@@ -1,12 +1,13 @@
 var fs = require("fs");
 var cmudictFile = readCmudictFile('./cmudict.txt');
+var words = formatData(cmudictFile);
 
 function readCmudictFile(file){
   return fs.readFileSync(file).toString();
 }
 
 // object constructor for each word
-var Word = function(wordString, phoneme, numSyllables){
+function Word(wordString, phoneme, numSyllables){
   this.wordString = wordString;
   this.phoneme = phoneme;
   this.numSyllables = numSyllables;
@@ -17,6 +18,8 @@ function formatData(data){
   var lineSplit;
   var numSyllables;
   var words = [];
+
+  // runs for each word
   lines.forEach(function(line){
     lineSplit = line.split('  ');
     numSyllables = countSyllables(lineSplit[1]);
@@ -28,27 +31,27 @@ function formatData(data){
     words.push(word);
   });
 
-  // console.log("words:", words);
-
-
-//  var word1 = words[Math.floor(Math.random() * words.length)].wordString;
-//   console.log(word1);
-// generateRandomWord(5, words);
-  generateHaiku([15,2,1,7,2,2,1], words);
+  return words;
 }
 
-formatData(cmudictFile);
 
-
-function countSyllables(line){
-  if(line !== undefined){
-    syllables = line.split(' ').length;
-    return syllables;
+function countSyllables(phoneme){
+  var totalSyllables = 0;
+  if(phoneme !== undefined){
+    var strings = phoneme.split(' ');
+    strings.forEach(function(item){
+      if(item.match(/\d/)) {
+        totalSyllables += 1;
+      }
+    });
+    return totalSyllables;
   }
 }
 
 function generateRandomWord(num, array) {
+  // console.log("array:", array);
   var matchingSyllablesArray = [];
+  var chosenWord;
 
   // populate array of words with same # syllables
   for(var i = 0; i < array.length; i++) {
@@ -56,17 +59,36 @@ function generateRandomWord(num, array) {
       matchingSyllablesArray.push(array[i]);
     }
   }
+
+  if(matchingSyllablesArray.length === 0) {
+    throw "No matches found";
+  };
   // console.log("matchingSyllablesArray:", matchingSyllablesArray);
-  var randomlyChosenWord = matchingSyllablesArray[Math.floor(Math.random() * matchingSyllablesArray.length)].wordString;
-  console.log("Chosen Word:", randomlyChosenWord + "\n");
-  // return word1;
+  var index = Math.floor(Math.random() * matchingSyllablesArray.length);
+  chosenWord = matchingSyllablesArray[index];
+  chosenWord = chosenWord.wordString;
+  return chosenWord;
 }
 
-function generateHaiku(haikuNumberArray, array){ // [5,7,5]
+function createHaiku(haikuNumberArray, array){ // ([5,7,5], arrOfAllWords)
+  var haiku = "";
   // randomly select words from cmudict to create haiku
   for(var i = 0; i < haikuNumberArray.length; i++) {
-    generateRandomWord(haikuNumberArray[i], array);
+    haiku += generateRandomWord(haikuNumberArray[i], array) + "\n";
   }
+
+  return haiku;
 }
+
+
+  // generateRandomWord(19, words);
+  createHaiku([8,2,1], words);
+
+var haiku = createHaiku([8,2,1], words);
+var haiku1 = createHaiku([5,7,5], words);
+var haiku2 = createHaiku([5,2,3], words);
+console.log(haiku);
+console.log(haiku1);
+console.log(haiku2);
 
 
