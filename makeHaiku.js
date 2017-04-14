@@ -1,11 +1,12 @@
-generateRandomWord = function(num, array) {
+generateRandomWord = function(num, arrayOfAllWords) {
   var matchingSyllablesArray = [];
   var chosenWord;
 
   // populate array of words with same # syllables
-  for(var i = 0; i < array.length; i++) {
-    if(array[i].numSyllables === num) {
-      matchingSyllablesArray.push(array[i]);
+  // use nested for loop
+  for(var i = 0; i < arrayOfAllWords.length; i++) {
+    if(arrayOfAllWords[i].numSyllables === num) {
+      matchingSyllablesArray.push(arrayOfAllWords[i]);
     }
   }
   if(matchingSyllablesArray.length === 0) {
@@ -18,11 +19,22 @@ generateRandomWord = function(num, array) {
   return chosenWord;
 }
 
-exports.createHaiku = function(haikuNumberArray, array){ // ([5,7,5], arrOfAllWords)
+exports.createHaiku = function(haikuNumberArray, arrayOfAllWords){ // ([5,7,5], words)
   var haiku = "";
+  var outerArray = haikuNumberArray;
+  var innerArray;
   // randomly select words from cmudict to create haiku
-  for(var i = 0; i < haikuNumberArray.length; i++) {
-    haiku += generateRandomWord(haikuNumberArray[i], array) + "\n";
+  for(var i = 0; i < outerArray.length; i++) {
+    haiku += "|";
+    innerArray = outerArray[i];
+    for(var j = 0; j < innerArray.length; j++) {
+      haiku += generateRandomWord(outerArray[i][j], arrayOfAllWords);
+      if(j < innerArray.length - 1) {
+        haiku += " ";
+      }
+    }
+    haiku += "|";
+    haiku += '\n';
   }
   return haiku;
 }
