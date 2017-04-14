@@ -34,7 +34,6 @@ function formatData(data){
   return words;
 }
 
-
 function countSyllables(phoneme){
   var totalSyllables = 0;
   if(phoneme !== undefined){
@@ -76,13 +75,9 @@ function createHaiku(haikuNumberArray, array){ // ([5,7,5], arrOfAllWords)
   for(var i = 0; i < haikuNumberArray.length; i++) {
     haiku += generateRandomWord(haikuNumberArray[i], array) + "\n";
   }
-
   return haiku;
 }
 
-
-  // generateRandomWord(19, words);
-  createHaiku([8,2,1], words);
 
 var haiku = createHaiku([8,2,1], words);
 var haiku1 = createHaiku([5,7,5], words);
