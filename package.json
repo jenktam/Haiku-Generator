@@ -1,0 +1,22 @@
+{
+  "name": "haiku",
+  "version": "1.0.0",
+  "description": "A haiku is a type of poem that writes 5 syllables on the first line, 7 on the second, and 5 on the third. I built a Haiku Generator that prints out haikus in the command line.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jenktam/Haiku-Generator.git"
+  },
+  "author": "Jen Tam",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jenktam/Haiku-Generator/issues"
+  },
+  "homepage": "https://github.com/jenktam/Haiku-Generator#readme",
+  "dependencies": {
+    "express": "^4.15.2"
+  }
+}
