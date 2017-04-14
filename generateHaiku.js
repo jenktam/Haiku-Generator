@@ -1,3 +1,7 @@
+/*
+This is the main program file. It requires the export objects from makeHaiku and parseDict. They are both used in here to log you haiku to the console.
+*/
+
 var fs = require("fs");
 var parseDict = require('./parseDict.js');
 var makeHaiku = require('./makeHaiku.js');
@@ -5,6 +9,7 @@ var makeHaiku = require('./makeHaiku.js');
 var cmudictFile = readCmudictFile('./cmudict.txt');
 var words = parseDict.formatData(cmudictFile);
 
+// Synchronous call to cmudictFile
 function readCmudictFile(file){
   return fs.readFileSync(file).toString();
 }
@@ -18,9 +23,8 @@ var array = [
             ];
 
 var haiku = makeHaiku.createHaiku(array, words);
-var haiku1 = makeHaiku.createHaiku([5,7,5], words);
-var haiku2 = makeHaiku.createHaiku([5,2,3], words);
-var array3 = [
+
+var array1 = [
               [2,3],
               [1,3,3],
               [3,2],
@@ -29,9 +33,6 @@ var array3 = [
               [3,2]
             ];
 
-// work on complexity
-var haiku3 = makeHaiku.createHaiku(array3, words);
+var haiku1 = makeHaiku.createHaiku(array1, words);
 console.log(haiku);
-// console.log(haiku1);
-// console.log(haiku2);
-console.log(haiku3);
+console.log(haiku1);
