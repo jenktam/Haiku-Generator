@@ -1,0 +1,21 @@
+body{
+  background: url(../img/mikael-kristenson-13641) dimgray;
+  opacity: 0.9;
+  width: 100%;
+  height: 100%;
+  background-color: #111;
+  background-position: 50%;
+  background-size: cover;
+  background-attachment: fixed;
+  /*font-family: 'Baloo Bhaina', cursive;*/
+  font-family: 'Sigmar One', cursive;
+}
+
+#main {
+  text-align: center;
+  margin: 10% 0;
+}
+
+#generated-haiku {
+  margin: 20px;
+}
