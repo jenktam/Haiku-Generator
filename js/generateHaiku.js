@@ -16,9 +16,9 @@ function readCmudictFile(file){
 
 exports.create = function(){
   var array = [
-    [1,2,5,1,3],
-    [4,3,1,5],
-    [2,7,2]
+    [1,2,1,1],
+    [2,3,2],
+    [2,2,1]
   ];
   return makeHaiku.createHaiku(array, words);
 }
